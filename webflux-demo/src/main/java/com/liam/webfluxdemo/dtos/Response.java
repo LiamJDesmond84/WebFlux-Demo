@@ -14,7 +14,6 @@ public class Response {
 	private int output;
 
 	public Response(int output) {
-
 		this.output = output;
 	}
 	

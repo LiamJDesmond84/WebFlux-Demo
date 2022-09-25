@@ -19,6 +19,8 @@ public class MathService {
 	public List<Response> multiplicationTable(int input) {
 		
 		return IntStream.rangeClosed(1, 10)
+				.peek(x -> SleepUtil.sleepSeconds(1))
+				.peek(x -> System.out.println("MathService processing element: " + x))
 				.mapToObj(x -> new Response(x * input))
 				.collect(Collectors.toList());
 		

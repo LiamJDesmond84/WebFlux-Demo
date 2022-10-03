@@ -1,7 +1,5 @@
 package com.liam.webfluxdemo.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.liam.webfluxdemo.dtos.Response;
 import com.liam.webfluxdemo.services.ReactiveMathService;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("reactive-math")
@@ -28,9 +29,9 @@ public class ReactiveMathController {
 	
 	
 	@GetMapping("table/{input}")
-	public List<Response> multiplicationTable(@PathVariable int input) {
+	public Flux<Response> multiplicationTable(@PathVariable int input) {
 		
-		return mathService.multiplicationTable(input);
+		return reactiveMathService.multiplicationTable(input);
 	}
 
 }

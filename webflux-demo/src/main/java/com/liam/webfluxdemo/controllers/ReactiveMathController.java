@@ -12,7 +12,9 @@ import com.liam.webfluxdemo.services.ReactiveMathService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-//Back-end will be acting as a Publisher
+// Back-end will be acting as a Publisher
+// Browser will be acting like a Subscriber
+// Microservice to Microservice - Calling Microservice will be acting as a Subscriber
 @RestController
 @RequestMapping("reactive-math")
 public class ReactiveMathController {

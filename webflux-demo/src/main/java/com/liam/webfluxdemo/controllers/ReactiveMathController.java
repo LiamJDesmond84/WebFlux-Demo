@@ -12,6 +12,7 @@ import com.liam.webfluxdemo.services.ReactiveMathService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+//Back-end will be acting as a Publisher
 @RestController
 @RequestMapping("reactive-math")
 public class ReactiveMathController {

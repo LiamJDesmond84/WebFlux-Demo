@@ -23,6 +23,7 @@ public class ReactiveMathController {
 	private ReactiveMathService reactiveMathService;
 	
 	
+	// input * input
 	@GetMapping("square/{input}")
 	public Mono<Response> findSquare(@PathVariable int input) {
 		
@@ -30,7 +31,7 @@ public class ReactiveMathController {
 	}
 	
 	
-	
+	// input'a multiplication table up to 10(5 - > 5 to 50)
 	@GetMapping("table/{input}")
 	public Flux<Response> multiplicationTable(@PathVariable int input) {
 		

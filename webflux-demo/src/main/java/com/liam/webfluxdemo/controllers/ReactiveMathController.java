@@ -40,7 +40,7 @@ public class ReactiveMathController {
 	}
 	
 	// input'a multiplication table up to 10(5 - > 5 to 50) - Does not wait for the 10 seconds -> When back-end service completes something, it pushes the value to our Subscriber(browser) - 1 at a time.
-	@GetMapping(value = "table/{input}/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@GetMapping(value = "table/{input}/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE) // <-------------------------------------- THIS
 	public Flux<Response> multiplicationTableStream(@PathVariable int input) {
 		
 		return reactiveMathService.multiplicationTable(input);

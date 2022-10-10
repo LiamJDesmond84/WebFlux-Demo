@@ -37,5 +37,12 @@ public class ReactiveMathController {
 		
 		return reactiveMathService.multiplicationTable(input);
 	}
+	
+	// input'a multiplication table up to 10(5 - > 5 to 50)
+	@GetMapping("table/{input}/stream")
+	public Flux<Response> multiplicationTableStream(@PathVariable int input) {
+		
+		return reactiveMathService.multiplicationTable(input);
+	}
 
 }

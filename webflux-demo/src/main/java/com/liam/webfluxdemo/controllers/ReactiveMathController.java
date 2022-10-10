@@ -32,7 +32,7 @@ public class ReactiveMathController {
 	}
 	
 	
-	// input'a multiplication table up to 10(5 - > 5 to 50)
+	// input'a multiplication table up to 10(5 - > 5 to 50) - Not any faster than normal List
 	@GetMapping("table/{input}")
 	public Flux<Response> multiplicationTable(@PathVariable int input) {
 		

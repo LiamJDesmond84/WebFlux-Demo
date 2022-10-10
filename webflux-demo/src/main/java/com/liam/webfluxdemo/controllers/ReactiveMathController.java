@@ -32,14 +32,14 @@ public class ReactiveMathController {
 	}
 	
 	
-	// input'a multiplication table up to 10(5 - > 5 to 50) - Not any faster than normal List
+	// input'a multiplication table up to 10(5 - > 5 to 50) - Not any faster than normal List - 10 seconds -> then sends everything.
 	@GetMapping("table/{input}")
 	public Flux<Response> multiplicationTable(@PathVariable int input) {
 		
 		return reactiveMathService.multiplicationTable(input);
 	}
 	
-	// input'a multiplication table up to 10(5 - > 5 to 50)
+	// input'a multiplication table up to 10(5 - > 5 to 50) - Does not wait for the 10 seconds -> When back-end service completes something, it pushes the value to our Subscriber(browser) - 1 at a time.
 	@GetMapping(value = "table/{input}/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<Response> multiplicationTableStream(@PathVariable int input) {
 		

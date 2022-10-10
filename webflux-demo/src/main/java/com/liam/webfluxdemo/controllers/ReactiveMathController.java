@@ -1,6 +1,7 @@
 package com.liam.webfluxdemo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public class ReactiveMathController {
 	}
 	
 	// input'a multiplication table up to 10(5 - > 5 to 50)
-	@GetMapping("table/{input}/stream")
+	@GetMapping(value = "table/{input}/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<Response> multiplicationTableStream(@PathVariable int input) {
 		
 		return reactiveMathService.multiplicationTable(input);

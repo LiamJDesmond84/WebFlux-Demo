@@ -1,5 +1,7 @@
 package com.liam.webfluxdemo.services;
 
+import java.time.Duration;
+
 import org.springframework.stereotype.Service;
 
 import com.liam.webfluxdemo.dtos.Response;
@@ -22,7 +24,8 @@ public class ReactiveMathService {
 	public Flux<Response> multiplicationTable(int input) {
 		
 		return Flux.range(1, 10)
-				.doOnNext(x -> SleepUtil.sleepSeconds(1))
+				.delayElements(Duration.ofSeconds(1))
+//				.doOnNext(x -> SleepUtil.sleepSeconds(1))
 				.doOnNext(x -> System.out.println("Reactive MathService processing element: " + x))
 				.map(x -> new Response(x * input))
 				.log();

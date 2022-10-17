@@ -35,7 +35,7 @@ public class ReactiveMathController {
 	// input'a multiplication table up to 10(5 - > 5 to 50) - Not any faster than normal List - 10 seconds -> then sends everything.
 	@GetMapping("table/{input}")
 	public Flux<Response> multiplicationTable(@PathVariable int input) {
-		
+		// Without MediaType.TEXT_EVENT_STREAM_VALUE - it still Collects.toList, so it will not exactly stream
 		return reactiveMathService.multiplicationTable(input);
 	}
 	

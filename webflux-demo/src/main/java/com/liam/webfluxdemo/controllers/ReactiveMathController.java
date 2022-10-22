@@ -33,7 +33,7 @@ public class ReactiveMathController {
 	
 	// Flux withOUT TEXT_EVENT_STREAM - Asynchronous/non-blocking - Can be cancelled anytime, but will only collect, convert to JSON & return the items until it is completed.
 	
-	// Flux WTIH TEXT_EVENT_STREAM - Asynchronous/non-blocking - Can be cancelled anytime, will only collect the items & convert to JSON
+	// Flux WTIH TEXT_EVENT_STREAM - Asynchronous/non-blocking - Can be cancelled anytime, will convert to JSON & return each item as it is emitted.
 	
 	
 	// input'a multiplication table up to 10(5 - > 5 to 50) - Not any faster than normal List - 10 seconds -> then sends everything.

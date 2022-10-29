@@ -38,6 +38,6 @@ public class ReactiveMathService {
 		return dtoMono
 					.map(dto -> dto.getFirst() * dto.getSecond())
 //					.map(Response::new);
-					.map(x -> new Response(x));
+					.map(x -> new Response(x)); // Same as above
 	}
 }

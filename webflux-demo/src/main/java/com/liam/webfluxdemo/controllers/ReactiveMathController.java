@@ -56,8 +56,9 @@ public class ReactiveMathController {
 	
 	
 	@PostMapping("multiply")
-	public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> dtoBody) { // Could be a huge payload response, so making it a Mono instead
+	public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDTOMono) { // Could be a huge payload response, so making it a Mono instead
 		
+		return reactiveMathService.multiply(requestDTOMono);
 		
 		
 		

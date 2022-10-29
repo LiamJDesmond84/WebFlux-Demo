@@ -5,6 +5,7 @@ import java.time.Duration;
 
 import org.springframework.stereotype.Service;
 
+import com.liam.webfluxdemo.dtos.MultiplyRequestDto;
 import com.liam.webfluxdemo.dtos.Response;
 
 import reactor.core.publisher.Flux;
@@ -31,5 +32,11 @@ public class ReactiveMathService {
 				.doOnNext(x -> System.out.println("Reactive MathService processing element: " + x))
 				.map(x -> new Response(x * input))
 				.log();
+	}
+	
+	public Mono<Response> multiply(Mono<MultiplyRequestDto> dtoMono) {
+		return dtoMono
+					.map(dto -> dto.getFirst() * dto.getSecond())
+					.map(Response::new);
 	}
 }

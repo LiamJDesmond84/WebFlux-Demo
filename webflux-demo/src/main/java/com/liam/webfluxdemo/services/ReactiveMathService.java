@@ -37,6 +37,7 @@ public class ReactiveMathService {
 	public Mono<Response> multiply(Mono<MultiplyRequestDto> dtoMono) {
 		return dtoMono
 					.map(dto -> dto.getFirst() * dto.getSecond())
-					.map(Response::new);
+//					.map(Response::new);
+					.map(x -> new Response(x));
 	}
 }

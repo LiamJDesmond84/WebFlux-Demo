@@ -1,11 +1,14 @@
 package com.liam.webfluxdemo.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,7 +59,8 @@ public class ReactiveMathController {
 	
 	
 	@PostMapping("multiply")
-	public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDTOMono) { // Could be a huge payload response, so making it a Mono instead
+	public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDTOMono, @RequestHeader Map<String, String> headers) { // Could be a huge payload response, so making it a Mono instead
+		System.out.println(headers);
 		
 		return reactiveMathService.multiply(requestDTOMono);
 		

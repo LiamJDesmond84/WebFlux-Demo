@@ -17,6 +17,14 @@ public class InputValidationException extends RuntimeException {
 		super(MSG);
 		this.input = input;
 	}
+
+	public static int getErrorcode() {
+		return errorCode;
+	}
+
+	public int getInput() {
+		return input;
+	}
 	
 	
 	

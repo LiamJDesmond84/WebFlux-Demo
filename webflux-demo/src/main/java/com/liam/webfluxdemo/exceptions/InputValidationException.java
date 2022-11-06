@@ -18,7 +18,7 @@ public class InputValidationException extends RuntimeException {
 		this.input = input;
 	}
 
-	public static int getErrorcode() {
+	public int getErrorcode() {
 		return errorCode;
 	}
 

@@ -46,5 +46,30 @@ public class ReactiveMathValidationController {
 		
 		return reactiveMathService.findSquare(input);
 	}
+	
+	// input * input
+	@GetMapping("square/{input}/throw")
+	public Mono<Response> monoError(@PathVariable int input) {
+		if(input < 10 || input > 20) {
+			
+			throw new InputValidationException(input);
+			
+			// 1: @ControllerAdvice
+			// 2: InputValidationHandler
+			// 3: @ExceptionHandler(InputValidationException.class)
+			// 4: public ResponseEntity<InputFailedValidationResponse> handleException(InputValidationException exc)
+			
+			// 5: InputFailedValidationResponse RESPONSE = new InputFailedValidationResponse(); with 
+			
+			// 6: Set ResponseEntity Values
+			
+			// return ResponseEntity.badRequest().body(RESPONSE);
+			
+			
+		}
+		
+		
+		return reactiveMathService.findSquare(input);
+	}
 
 }

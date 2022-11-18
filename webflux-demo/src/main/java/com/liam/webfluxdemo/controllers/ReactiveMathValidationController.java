@@ -47,7 +47,7 @@ public class ReactiveMathValidationController {
 		return reactiveMathService.findSquare(input);
 	}
 	
-	// Same as above
+	// Same as above, but handled...  Differently
 	@GetMapping("square/{input}/mono-error")
 	public Mono<Response> monoError(@PathVariable int input) {
 		

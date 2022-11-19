@@ -22,7 +22,7 @@ public class RequestHandler {
 			// Accessing the variable
 			int input = Integer.valueOf(serverRequest.pathVariable("input"));
 			
-			// Publisher?
+			// Publisher Interface(Mono, Flux)
 			Mono<Response> responseMono = reactiveMathService.findSquare(input);
 			
 			return ServerResponse.ok().body(responseMono, Response.class);

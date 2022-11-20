@@ -18,7 +18,7 @@ public class RouterConfig {
 	public RouterFunction<ServerResponse> serverResponseRouterFunction() {
 		
 		return RouterFunctions.route()
-//				.GET("router/square/{input}", requestHandler.squareHandler())
+//				.GET("router/square/{input}", requestHandler.squareHandler)
 				.GET("router/square/{input}", requestHandler::squareHandler)
 				.build();
 		

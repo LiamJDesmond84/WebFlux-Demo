@@ -11,6 +11,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Configuration
 public class RouterConfig {
 	
+	// FUNCTIONAL ENDPOINTS - Alternative method to using the Controller
+	
 	// https://www.baeldung.com/spring-5-functional-web
 	
 	// First, we need to create routes using RouterFunction to publish and consume our reactive streams of Employees.

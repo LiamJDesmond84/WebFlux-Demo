@@ -11,6 +11,12 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Configuration
 public class RouterConfig {
 	
+	// https://www.baeldung.com/spring-5-functional-web
+	
+	// First, we need to create routes using RouterFunction to publish and consume our reactive streams of Employees.
+
+	// Routes are registered as Spring beans and can be created inside any configuration class.
+	
 	@Autowired
 	private RequestHandler requestHandler;
 

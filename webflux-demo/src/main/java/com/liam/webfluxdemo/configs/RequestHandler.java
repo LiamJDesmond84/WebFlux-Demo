@@ -30,6 +30,8 @@ public class RequestHandler {
 		}
 		
 		
+		// ServerResponse is an object that CONTAINS Flux & Mono - <Response> - Doesn't have to return 1:1
+		
 		public Mono<ServerResponse> tableHandler(ServerRequest serverRequest) {
 			
 			// Accessing the variable

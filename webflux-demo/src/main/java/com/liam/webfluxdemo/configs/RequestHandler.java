@@ -61,7 +61,7 @@ public class RequestHandler {
 		}
 		
 		
-		public Mono<ServerResponse> postHandler(ServerRequest serverRequest) {
+		public Mono<ServerResponse> multiplyHandler(ServerRequest serverRequest) {
 			
 			// Accessing the variable
 			Mono<MultiplyRequestDto> requestDTOMono = serverRequest.bodyToMono(MultiplyRequestDto.class);

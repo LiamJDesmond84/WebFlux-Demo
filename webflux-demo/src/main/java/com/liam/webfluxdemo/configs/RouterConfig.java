@@ -33,6 +33,7 @@ public class RouterConfig {
 //				.GET("router/square/{input}", requestHandler::squareHandler)
 				.GET("router/table/{input}", requestHandler::tableHandler)
 				.GET("router/table/{input}/stream", requestHandler::tableStreamHandler)
+				.POST("router/multiple/{input}/stream", requestHandler::multiplyHandler)
 				.build();
 		
 		

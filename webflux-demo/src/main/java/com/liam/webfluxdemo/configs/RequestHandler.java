@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import com.liam.webfluxdemo.dtos.MultiplyRequestDto;
 import com.liam.webfluxdemo.dtos.Response;
 import com.liam.webfluxdemo.services.ReactiveMathService;
 
@@ -63,14 +64,13 @@ public class RequestHandler {
 		public Mono<ServerResponse> postHandler(ServerRequest serverRequest) {
 			
 			// Accessing the variable
-			int input = Integer.parseInt(serverRequest.pathVariable("input"));
+			Mono<MultiplyRequestDto> requestDTOMono = serverRequest.bodyToMono(MultiplyRequestDto.class);
 			
-			// Returning this Publisher Interface(Mono, Flux)<Response>
-			Flux<Response> responseFlux = reactiveMathService.multiplicationTable(input);
-														// Returning Reponse
+			Mono<Response> responseMono = this.reactiveMathService.multiply(requestDTOMono);
+
 			return ServerResponse.ok()
 					.contentType(MediaType.TEXT_EVENT_STREAM)
-					.body(responseFlux, Response.class);
+					.body(responseMono, Response.class);
 		}
 
 }

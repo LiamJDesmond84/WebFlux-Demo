@@ -8,6 +8,9 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+
+// Instead of Controller
+// RouterConfig -> RouterHandler -> ReactiveMathService
 @Configuration
 public class RouterConfig {
 	

@@ -58,5 +58,19 @@ public class RequestHandler {
 					.contentType(MediaType.TEXT_EVENT_STREAM)
 					.body(responseFlux, Response.class);
 		}
+		
+		
+		public Mono<ServerResponse> postHandler(ServerRequest serverRequest) {
+			
+			// Accessing the variable
+			int input = Integer.parseInt(serverRequest.pathVariable("input"));
+			
+			// Returning this Publisher Interface(Mono, Flux)<Response>
+			Flux<Response> responseFlux = reactiveMathService.multiplicationTable(input);
+														// Returning Reponse
+			return ServerResponse.ok()
+					.contentType(MediaType.TEXT_EVENT_STREAM)
+					.body(responseFlux, Response.class);
+		}
 
 }

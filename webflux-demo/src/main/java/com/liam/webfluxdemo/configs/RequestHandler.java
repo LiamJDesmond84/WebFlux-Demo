@@ -72,5 +72,19 @@ public class RequestHandler {
 					.contentType(MediaType.TEXT_EVENT_STREAM)
 					.body(responseMono, Response.class);
 		}
+		
+		
+		// WITH VALIDATION
+		
+		public Mono<ServerResponse> squareHandlerWithValidation(ServerRequest serverRequest) {
+			
+			// Accessing the variable
+			int input = Integer.parseInt(serverRequest.pathVariable("input"));
+			
+			// Returning this Publisher Interface(Mono, Flux)<Response>
+			Mono<Response> responseMono = reactiveMathService.findSquare(input);
+														// Returning Reponse
+			return ServerResponse.ok().body(responseMono, Response.class);
+		}
 
 }

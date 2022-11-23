@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import com.liam.webfluxdemo.dtos.InputFailedValidationResponse;
+
 import com.liam.webfluxdemo.dtos.MultiplyRequestDto;
 import com.liam.webfluxdemo.dtos.Response;
 import com.liam.webfluxdemo.exceptions.InputValidationException;
@@ -85,11 +85,9 @@ public class RequestHandler {
 			
 			if(input < 10 || input > 20) {
 				
-				
 				return Mono.error(new InputValidationException(input));	
 				
 			}
-			
 			// Returning this Publisher Interface(Mono, Flux)<Response>
 			Mono<Response> responseMono = reactiveMathService.findSquare(input);
 														// Returning Reponse

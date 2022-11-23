@@ -1,12 +1,19 @@
 package com.liam.webfluxdemo.configs;
 
+import java.util.function.BiFunction;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
-
+import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+
+import com.liam.webfluxdemo.dtos.InputFailedValidationResponse;
+import com.liam.webfluxdemo.exceptions.InputValidationException;
+
+import reactor.core.publisher.Mono;
 
 
 // Instead of Controller
@@ -34,8 +41,31 @@ public class RouterConfig {
 				.GET("router/table/{input}", requestHandler::tableHandler)
 				.GET("router/table/{input}/stream", requestHandler::tableStreamHandler)
 				.POST("router/multiple", requestHandler::multiplyHandler)
+				.onError(InputValidationException.class, exceptionHandler())
 				.build();
 		
 		
+	}
+	
+	
+	private BiFunction<Throwable, ServerRequest, Mono<ServerResponse>> exceptionHandler() {
+		
+		return (err, req) -> {
+			
+			InputValidationException excep = (InputValidationException) err;
+			
+			InputFailedValidationResponse response = new InputFailedValidationResponse();
+			
+			response.setInput(excep.getInput());
+			response.setMessage(excep.getMessage());
+			response.setErrorCode(excep.getErrorcode());
+			
+			return ServerResponse.badRequest().bodyValue(response);
+			
+			
+
+			
+			
+		};
 	}
 }

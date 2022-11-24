@@ -56,7 +56,8 @@ public class RouterConfig {
 				
 				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
 //				.GET("router/square/{input}", requestHandler::squareHandler)
-				.GET("table/{input}", requestHandler::tableHandler)
+//				.GET("table/{input}", requestHandler::tableHandler)
+				.GET("table/{input}", requestHandler::tableHandlerWithValidation)
 				.GET("table/{input}/stream", requestHandler::tableStreamHandler)
 				.POST("multiple", requestHandler::multiplyHandler)
 				.GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)

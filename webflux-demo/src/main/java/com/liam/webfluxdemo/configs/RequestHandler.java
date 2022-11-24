@@ -93,5 +93,24 @@ public class RequestHandler {
 														// Returning Reponse
 			return ServerResponse.ok().body(responseMono, Response.class);
 		}
+		
+		// ServerResponse is an object that CONTAINS Flux & Mono - <Response> - Doesn't have to return 1:1
+		
+		public Mono<ServerResponse> tableHandlerWithValidation(ServerRequest serverRequest) {
+			
+			// Accessing the variable
+			int input = Integer.parseInt(serverRequest.pathVariable("input"));
+			
+			if(input < 10 || input > 20) {
+				
+				return Mono.error(new InputValidationException(input));	
+				
+			}
+			
+			// Returning this Publisher Interface(Mono, Flux)<Response>
+			Flux<Response> responseFlux = reactiveMathService.multiplicationTable(input);
+														// Returning Reponse
+			return ServerResponse.ok().body(responseFlux, Response.class);
+		}
 
 }

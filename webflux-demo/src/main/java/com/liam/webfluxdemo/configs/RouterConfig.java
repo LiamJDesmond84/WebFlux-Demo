@@ -58,12 +58,13 @@ public class RouterConfig {
 //				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
 				.GET("square/{input}", requestHandler::squareHandler)
 				.GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)
-				.GET("square/{input}/withPredicates", RequestPredicates.path("*/1?"),requestHandler::squareHandler)
+				.GET("square/{input}/withPredicates", RequestPredicates.path("*/1?"),requestHandler::squareHandler) // */startes with 1#
 				.GET("square/{input}", req -> ServerResponse.badRequest().bodyValue("Allowed range is 10 to 19"))
 				
 				.GET("table/{input}", requestHandler::tableHandler)
 				.GET("table/{input}/validation", requestHandler::tableHandlerWithValidation)
 				.GET("table/{input}/stream", requestHandler::tableStreamHandler)
+				
 				.POST("multiple", requestHandler::multiplyHandler)
 				.onError(InputValidationException.class, exceptionHandler())
 				.build();

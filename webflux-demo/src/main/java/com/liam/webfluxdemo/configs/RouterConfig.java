@@ -32,6 +32,8 @@ public class RouterConfig {
 	@Autowired
 	private RequestHandler requestHandler;
 	
+	// OPTIONAL
+	
 	@Bean RouterFunction<ServerResponse> highLevelRouter() {
 		
 		return RouterFunctions.route()
@@ -46,7 +48,8 @@ public class RouterConfig {
 	public RouterFunction<ServerResponse> serverResponseRouterFunction() {
 		
 		return RouterFunctions.route()
-				.GET("router/square/{input}", (x) -> requestHandler.squareHandler(x))
+				
+				.GET("router//{input}", (x) -> requestHandler.squareHandler(x))
 //				.GET("router/square/{input}", requestHandler::squareHandler)
 				.GET("router/table/{input}", requestHandler::tableHandler)
 				.GET("router/table/{input}/stream", requestHandler::tableStreamHandler)
@@ -54,6 +57,21 @@ public class RouterConfig {
 				.GET("router/square/{input}/validation", requestHandler::squareHandlerWithValidation)
 				.onError(InputValidationException.class, exceptionHandler())
 				.build();
+		
+		
+//	@Bean
+//	public RouterFunction<ServerResponse> serverResponseRouterFunction() {
+//		
+//		return RouterFunctions.route()
+//				
+//				.GET("router//{input}", (x) -> requestHandler.squareHandler(x))
+////					.GET("router/square/{input}", requestHandler::squareHandler)
+//				.GET("router/table/{input}", requestHandler::tableHandler)
+//				.GET("router/table/{input}/stream", requestHandler::tableStreamHandler)
+//				.POST("router/multiple", requestHandler::multiplyHandler)
+//				.GET("router/square/{input}/validation", requestHandler::squareHandlerWithValidation)
+//				.onError(InputValidationException.class, exceptionHandler())
+//				.build();		
 		
 		
 	}

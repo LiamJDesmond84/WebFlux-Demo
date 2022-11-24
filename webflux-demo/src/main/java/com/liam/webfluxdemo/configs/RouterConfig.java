@@ -5,6 +5,7 @@ import java.util.function.BiFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -55,8 +56,11 @@ public class RouterConfig {
 		return RouterFunctions.route()
 				
 //				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
-				.GET("router/square/{input}", requestHandler::squareHandler)
+				.GET("square/{input}", requestHandler::squareHandler)
 				.GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)
+				.GET("square/{input}/withPredicates", RequestPredicates.path("*/1?"),requestHandler::squareHandler)
+				.GET("square/{input}", req -> ServerResponse.badRequest().bodyValue("Allowed range is 10 to 19"))
+				
 				.GET("table/{input}", requestHandler::tableHandler)
 				.GET("table/{input}/validation", requestHandler::tableHandlerWithValidation)
 				.GET("table/{input}/stream", requestHandler::tableStreamHandler)

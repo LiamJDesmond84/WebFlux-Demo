@@ -34,10 +34,14 @@ public class RouterConfig {
 	
 	// OPTIONAL
 	
+	// highLevelRouter - /router/square/15
+	// Matching Method 			/square/15
+	
 	@Bean RouterFunction<ServerResponse> highLevelRouter() {
 		
 		return RouterFunctions.route()
-				// If URL contains "router" use this
+				
+				// If URL contains "router" use this method
 				.path("router", this::serverResponseRouterFunction)
 				.build();
 				
@@ -49,12 +53,12 @@ public class RouterConfig {
 		
 		return RouterFunctions.route()
 				
-				.GET("router//{input}", (x) -> requestHandler.squareHandler(x))
+				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
 //				.GET("router/square/{input}", requestHandler::squareHandler)
-				.GET("router/table/{input}", requestHandler::tableHandler)
-				.GET("router/table/{input}/stream", requestHandler::tableStreamHandler)
-				.POST("router/multiple", requestHandler::multiplyHandler)
-				.GET("router/square/{input}/validation", requestHandler::squareHandlerWithValidation)
+				.GET("table/{input}", requestHandler::tableHandler)
+				.GET("table/{input}/stream", requestHandler::tableStreamHandler)
+				.POST("multiple", requestHandler::multiplyHandler)
+				.GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)
 				.onError(InputValidationException.class, exceptionHandler())
 				.build();
 		
@@ -64,7 +68,7 @@ public class RouterConfig {
 //		
 //		return RouterFunctions.route()
 //				
-//				.GET("router//{input}", (x) -> requestHandler.squareHandler(x))
+//				.GET("router/square/{input}", (x) -> requestHandler.squareHandler(x))
 ////					.GET("router/square/{input}", requestHandler::squareHandler)
 //				.GET("router/table/{input}", requestHandler::tableHandler)
 //				.GET("router/table/{input}/stream", requestHandler::tableStreamHandler)

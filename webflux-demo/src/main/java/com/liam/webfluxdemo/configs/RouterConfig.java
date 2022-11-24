@@ -54,11 +54,11 @@ public class RouterConfig {
 		
 		return RouterFunctions.route()
 				
-				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
+//				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
+				.GET("router/square/{input}", requestHandler::squareHandler)
 				.GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)
-//				.GET("router/square/{input}", requestHandler::squareHandler)
-//				.GET("table/{input}", requestHandler::tableHandler)
-				.GET("table/{input}", requestHandler::tableHandlerWithValidation) // Validation - Didn't add /validation though
+				.GET("table/{input}", requestHandler::tableHandler)
+				.GET("table/{input}/validation", requestHandler::tableHandlerWithValidation)
 				.GET("table/{input}/stream", requestHandler::tableStreamHandler)
 				.POST("multiple", requestHandler::multiplyHandler)
 				.onError(InputValidationException.class, exceptionHandler())

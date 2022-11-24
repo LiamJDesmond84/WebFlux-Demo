@@ -31,6 +31,16 @@ public class RouterConfig {
 	
 	@Autowired
 	private RequestHandler requestHandler;
+	
+	@Bean RouterFunction<ServerResponse> highLevelRouter() {
+		
+		return RouterFunctions.route()
+				// If URL contains "router" use this
+				.path("router", this::serverResponseRouterFunction)
+				.build();
+				
+		
+	}
 
 	@Bean
 	public RouterFunction<ServerResponse> serverResponseRouterFunction() {

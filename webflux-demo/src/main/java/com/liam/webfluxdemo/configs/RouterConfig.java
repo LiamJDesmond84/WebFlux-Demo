@@ -37,7 +37,8 @@ public class RouterConfig {
 	// highLevelRouter - /router/square/15
 	// Matching Method 			/square/15
 	
-	@Bean RouterFunction<ServerResponse> highLevelRouter() {
+	@Bean
+	RouterFunction<ServerResponse> highLevelRouter() {
 		
 		return RouterFunctions.route()
 				
@@ -48,8 +49,8 @@ public class RouterConfig {
 		
 	}
 
-	@Bean
-	public RouterFunction<ServerResponse> serverResponseRouterFunction() {
+//	@Bean			- Does not have to be a Bean & can be private if called RouterFunction Bean
+	private RouterFunction<ServerResponse> serverResponseRouterFunction() {
 		
 		return RouterFunctions.route()
 				

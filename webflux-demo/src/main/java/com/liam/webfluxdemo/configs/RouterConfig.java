@@ -58,8 +58,10 @@ public class RouterConfig {
 //				.GET("square/{input}", (x) -> requestHandler.squareHandler(x))
 				.GET("square/{input}", requestHandler::squareHandler)
 				.GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)
-				.GET("square/{input}/withPredicates", RequestPredicates.path("*/1?"),requestHandler::squareHandler) // */startes with 1#
-				.GET("square/{input}", req -> ServerResponse.badRequest().bodyValue("Allowed range is 10 to 19"))
+				
+				 // */startes with 1# - Matching only 1 more character OR is 20
+				.GET("square/{input}/withPredicates", RequestPredicates.path("*/1?").or(RequestPredicates.path("*/20")),requestHandler::squareHandler)
+				.GET("square/{input}", req -> ServerResponse.badRequest().bodyValue("Allowed range is 10 to 20"))
 				
 				.GET("table/{input}", requestHandler::tableHandler)
 				.GET("table/{input}/validation", requestHandler::tableHandlerWithValidation)

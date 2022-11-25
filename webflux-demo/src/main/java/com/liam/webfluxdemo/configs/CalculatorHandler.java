@@ -30,6 +30,17 @@ public class CalculatorHandler {
 		return intProcess(serverRequest, (a, b) -> ServerResponse.ok().bodyValue(a - b));
 	}
 	
+	public Mono<ServerResponse> multiplicationHandler(ServerRequest serverRequest) {
+		
+		return intProcess(serverRequest, (a, b) -> ServerResponse.ok().bodyValue(a * b));
+	}
+	
+	
+	public Mono<ServerResponse> divisionHandler(ServerRequest serverRequest) {
+		
+		return intProcess(serverRequest, (a, b) -> ServerResponse.ok().bodyValue(a / b));
+	}
+	
 	
 	private Mono<ServerResponse> intProcess(ServerRequest serverRequest, BiFunction<Integer, Integer, Mono<ServerResponse>> operationLogic) {
 		

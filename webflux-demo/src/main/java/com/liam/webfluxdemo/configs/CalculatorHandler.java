@@ -23,7 +23,6 @@ public class CalculatorHandler {
 		return ServerResponse.ok().bodyValue(a + b);
 	}
 	
-	
 	// Using intProcess below
 	public Mono<ServerResponse> subtractionHandler(ServerRequest request) {
 		
@@ -39,7 +38,12 @@ public class CalculatorHandler {
 	// Using intProcess below
 	public Mono<ServerResponse> divisionHandler(ServerRequest request) {
 		
-		return intProcess(request, (a, b) -> ServerResponse.ok().bodyValue(a / b));
+		return intProcess(request, (a, b) -> 
+			
+			 b != 0 ? ServerResponse.ok().bodyValue(a / b)
+							:
+							ServerResponse.badRequest().bodyValue("b cannot be 0"));
+		
 	}
 	
 	
@@ -50,9 +54,7 @@ public class CalculatorHandler {
 		
 		return operationLogic.apply(a, b);
 		
-		
 	}
-	
 	
 	private int getValue(ServerRequest request, String key) {
 		

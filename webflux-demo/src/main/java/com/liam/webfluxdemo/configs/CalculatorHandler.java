@@ -25,27 +25,28 @@ public class CalculatorHandler {
 	
 	
 	// Using intProcess below
-	public Mono<ServerResponse> subtractionHandler(ServerRequest serverRequest) {
+	public Mono<ServerResponse> subtractionHandler(ServerRequest request) {
 		
-		return intProcess(serverRequest, (a, b) -> ServerResponse.ok().bodyValue(a - b));
+		return intProcess(request, (a, b) -> ServerResponse.ok().bodyValue(a - b));
 	}
 	
-	public Mono<ServerResponse> multiplicationHandler(ServerRequest serverRequest) {
+	// Using intProcess below
+	public Mono<ServerResponse> multiplicationHandler(ServerRequest request) {
 		
-		return intProcess(serverRequest, (a, b) -> ServerResponse.ok().bodyValue(a * b));
+		return intProcess(request, (a, b) -> ServerResponse.ok().bodyValue(a * b));
+	}
+	
+	// Using intProcess below
+	public Mono<ServerResponse> divisionHandler(ServerRequest request) {
+		
+		return intProcess(request, (a, b) -> ServerResponse.ok().bodyValue(a / b));
 	}
 	
 	
-	public Mono<ServerResponse> divisionHandler(ServerRequest serverRequest) {
+	private Mono<ServerResponse> intProcess(ServerRequest request, BiFunction<Integer, Integer, Mono<ServerResponse>> operationLogic) {
 		
-		return intProcess(serverRequest, (a, b) -> ServerResponse.ok().bodyValue(a / b));
-	}
-	
-	
-	private Mono<ServerResponse> intProcess(ServerRequest serverRequest, BiFunction<Integer, Integer, Mono<ServerResponse>> operationLogic) {
-		
-		int a = getValue(serverRequest, "a");
-		int b = getValue(serverRequest, "b");
+		int a = getValue(request, "a");
+		int b = getValue(request, "b");
 		
 		return operationLogic.apply(a, b);
 		
@@ -53,8 +54,8 @@ public class CalculatorHandler {
 	}
 	
 	
-	private int getValue(ServerRequest serverRequest, String key) {
+	private int getValue(ServerRequest request, String key) {
 		
-		return Integer.parseInt(serverRequest.pathVariable(key));
+		return Integer.parseInt(request.pathVariable(key));
 	}
 }

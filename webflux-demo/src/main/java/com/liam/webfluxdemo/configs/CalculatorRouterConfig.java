@@ -32,6 +32,7 @@ public class CalculatorRouterConfig {
 			.GET("{a}/{b}", isOperation("-"), calculatorHandler::subtractionHandler)
 			.GET("{a}/{b}", isOperation("*"), calculatorHandler::multiplicationHandler)
 			.GET("{a}/{b}", isOperation("/"), calculatorHandler::divisionHandler)
+			.GET("{a}/{b}", req -> ServerResponse.badRequest().bodyValue("OP must include +, -, * or /"))
 			.build();
 			
 	}

@@ -39,7 +39,7 @@ public class RouterConfig {
 	// Matching Method 			/square/15
 	
 	@Bean
-	RouterFunction<ServerResponse> highLevelRouter() {
+	public RouterFunction<ServerResponse> highLevelRouter() {
 		
 		return RouterFunctions.route()
 				

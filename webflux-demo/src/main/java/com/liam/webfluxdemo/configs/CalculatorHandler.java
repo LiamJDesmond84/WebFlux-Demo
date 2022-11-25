@@ -40,9 +40,8 @@ public class CalculatorHandler {
 		
 		return intProcess(request, (a, b) -> 
 			
-			 b != 0 ? ServerResponse.ok().bodyValue(a / b)
-							:
-							ServerResponse.badRequest().bodyValue("b cannot be 0"));
+			 b != 0 ? ServerResponse.ok().bodyValue(a / b) :
+					  ServerResponse.badRequest().bodyValue("b cannot be 0"));
 		
 	}
 	

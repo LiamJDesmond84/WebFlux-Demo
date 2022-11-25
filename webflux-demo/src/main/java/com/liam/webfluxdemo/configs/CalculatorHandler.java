@@ -10,9 +10,13 @@ import reactor.core.publisher.Mono;
 public class CalculatorHandler {
 
 	// Creating multiple handlers intentionally
+	// Calculator/{a}/{b}
 	public Mono<ServerResponse> additionHandler(ServerRequest serverRequest) {
 		
-		request.
+		int a = getValue(serverRequest, "a");
+		int b = getValue(serverRequest, "b");
+		
+		return ServerResponse.ok().bodyValue(a + b);
 	}
 	
 	private int getValue(ServerRequest serverRequest, String key) {

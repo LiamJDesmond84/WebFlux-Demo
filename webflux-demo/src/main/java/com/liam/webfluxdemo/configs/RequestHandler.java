@@ -34,22 +34,22 @@ public class RequestHandler {
 			Mono<Response> responseMono = reactiveMathService.findSquare(input);
 			
 			return ServerResponse.ok().body(responseMono, Response.class);
-			
+			// Returning Reponse
 			
 			
 //			Mono<Mono<Response>> parallelMono = Mono.just(responseMono).subscribeOn(Schedulers.parallel()).map(x -> {
-	//			log.info("Thread 1: {}", x);
-	//			return x;
-	//			}).log();
+//				log.info("Thread 1: {}", x);
+//				return x;
+//				}).log();
 //		
 //		
 //			Mono<Mono<Response>> parallelMono2 = Mono.just(responseMono).subscribeOn(Schedulers.parallel()).map(x -> {
-	//			log.info("Thread 2: {}", x);
-	//			return x;
-	//			}).log();
-		
+//				log.info("Thread 2: {}", x);
+//				return x;
+//			}).log();
+//		
 //		return ServerResponse.ok().body(parallelMono.mergeWith(parallelMono2), Response.class);
-													// Returning Reponse
+													
 		}
 		
 		

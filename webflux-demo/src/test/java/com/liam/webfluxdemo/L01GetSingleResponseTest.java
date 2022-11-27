@@ -6,6 +6,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.liam.webfluxdemo.dtos.Response;
 
+import reactor.core.publisher.Mono;
+
 public class L01GetSingleResponseTest extends BaseTest {
 	
 	@Autowired
@@ -31,14 +33,13 @@ public class L01GetSingleResponseTest extends BaseTest {
 	public void stepVerifierTest() {
 		
 		
-		Response response = webClient
+		Mono<Response> responseMono = webClient
 			.get()
 			.uri("reactive-math/square/{inputVar}", 5)
 			.retrieve()
-			.bodyToMono(Response.class) // Mono<Response>
-			.block();
+			.bodyToMono(Response.class); // Mono<Response>
 		
-		System.out.println(response);
+		System.out.println(responseMono);
 		
 	}
 

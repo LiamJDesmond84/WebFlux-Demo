@@ -38,7 +38,8 @@ public class L01GetSingleResponseTest extends BaseTest {
 			.get()
 			.uri("reactive-math/square/{inputVar}", 5)
 			.retrieve()
-			.bodyToMono(Response.class); // Mono<Response>
+			.bodyToMono(Response.class) // Mono<Response>
+			.log();
 		
 		StepVerifier.create(responseMono)
 			.expectNextMatches(x -> x.getOutput() == 25)

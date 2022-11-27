@@ -12,10 +12,13 @@ import com.liam.webfluxdemo.dtos.Response;
 import com.liam.webfluxdemo.exceptions.InputValidationException;
 import com.liam.webfluxdemo.services.ReactiveMathService;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
+@Slf4j
 public class RequestHandler {
 	
 		@Autowired
@@ -29,8 +32,24 @@ public class RequestHandler {
 			
 			// Returning this Publisher Interface(Mono, Flux)<Response>
 			Mono<Response> responseMono = reactiveMathService.findSquare(input);
-														// Returning Reponse
+			
 			return ServerResponse.ok().body(responseMono, Response.class);
+			
+			
+			
+//			Mono<Mono<Response>> parallelMono = Mono.just(responseMono).subscribeOn(Schedulers.parallel()).map(x -> {
+	//			log.info("Thread 1: {}", x);
+	//			return x;
+	//			}).log();
+//		
+//		
+//			Mono<Mono<Response>> parallelMono2 = Mono.just(responseMono).subscribeOn(Schedulers.parallel()).map(x -> {
+	//			log.info("Thread 2: {}", x);
+	//			return x;
+	//			}).log();
+		
+//		return ServerResponse.ok().body(parallelMono.mergeWith(parallelMono2), Response.class);
+													// Returning Reponse
 		}
 		
 		

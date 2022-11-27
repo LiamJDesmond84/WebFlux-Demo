@@ -23,6 +23,8 @@ public class L01GetSingleResponseTest extends BaseTest {
 			.bodyToMono(Response.class) // Mono<Response>
 			.block();
 		
+		System.out.println(response);
+		
 	}
 
 }

@@ -16,7 +16,7 @@ public class L01GetSingleResponseTest extends BaseTest {
 	public void blockTest() {
 		
 		
-		webClient
+		Response response = webClient
 			.get()
 			.uri("reactive-math/square/{inputVar}", 5)
 			.retrieve()

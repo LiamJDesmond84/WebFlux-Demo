@@ -26,5 +26,20 @@ public class L01GetSingleResponseTest extends BaseTest {
 		System.out.println(response);
 		
 	}
+	
+	@Test
+	public void stepVerifierTest() {
+		
+		
+		Response response = webClient
+			.get()
+			.uri("reactive-math/square/{inputVar}", 5)
+			.retrieve()
+			.bodyToMono(Response.class) // Mono<Response>
+			.block();
+		
+		System.out.println(response);
+		
+	}
 
 }

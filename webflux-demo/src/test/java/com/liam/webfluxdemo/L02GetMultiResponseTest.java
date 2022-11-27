@@ -16,18 +16,20 @@ public class L02GetMultiResponseTest extends BaseTest {
 	
 	
 	@Test
-	public void stepVerifierTest2() {
+	public void stepVerifierFluxTest() {
 		
 		
-		Flux<Response> responseMono = webClient
+		Flux<Response> responseFlux = webClient
 			.get()
-			.uri("reactive-math/square/{inputVar}", 5)
+			.uri("reactive-math/table/{inputVar}", 5)
 			.retrieve()
 			.bodyToFlux(Response.class) // Mono<Response>
+//			.doOnNext(x -> System.out.println(x))
+			.doOnNext(System.out::println)
 			.log();
 		
-		StepVerifier.create(responseMono)
-			.expectNextMatches(x -> x.getOutput() == 25)
+		StepVerifier.create(responseFlux)
+			.expectNextCount(10)
 			.verifyComplete();
 		
 	}

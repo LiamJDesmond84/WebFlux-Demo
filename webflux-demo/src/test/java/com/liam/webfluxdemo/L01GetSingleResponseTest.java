@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.liam.webfluxdemo.dtos.Response;
 
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 public class L01GetSingleResponseTest extends BaseTest {
 	
@@ -39,7 +40,9 @@ public class L01GetSingleResponseTest extends BaseTest {
 			.retrieve()
 			.bodyToMono(Response.class); // Mono<Response>
 		
-		System.out.println(responseMono);
+		StepVerifier.create(responseMono)
+			.expectNextMatches(x -> x.getOutput() == 25)
+			.verifyComplete();
 		
 	}
 

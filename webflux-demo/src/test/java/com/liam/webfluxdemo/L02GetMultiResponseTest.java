@@ -24,9 +24,9 @@ public class L02GetMultiResponseTest extends BaseTest {
 			.uri("reactive-math/table/{inputVar}", 5)
 			.retrieve()
 			.bodyToFlux(Response.class) // Mono<Response>
-			.doOnNext(x -> System.out.println("Print Statement: " + x))
+			.doOnNext(x -> System.out.println("Print Statement: " + x));
 //			.doOnNext(System.out::println)
-			.log();
+//			.log();
 		
 		StepVerifier.create(responseFlux)
 			.expectNextCount(10)

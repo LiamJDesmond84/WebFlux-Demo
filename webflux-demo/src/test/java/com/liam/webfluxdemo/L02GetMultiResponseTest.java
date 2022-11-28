@@ -41,7 +41,7 @@ public class L02GetMultiResponseTest extends BaseTest {
 		
 		Flux<Response> responseFlux = webClient
 			.get()
-			.uri("reactive-math/table/{inputVar}", 5)
+			.uri("reactive-math/table/{inputVar}/stream", 5)
 			.retrieve()
 			.bodyToFlux(Response.class) // Mono<Response>
 			.doOnNext(x -> System.out.println("Print Statement: " + x));

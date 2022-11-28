@@ -3,7 +3,7 @@ package com.liam.webfluxdemo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.server.ServerRequest;
+
 
 import com.liam.webfluxdemo.dtos.MultiplyRequestDto;
 import com.liam.webfluxdemo.dtos.Response;
@@ -23,7 +23,7 @@ public class L03PostRequestTest extends BaseTest {
 		Mono<Response> responseMono = webClient
 			.post()
 			.uri("reactive-math/multiply")
-			.bodyValue(buiRequestDto(5, 2))
+			.bodyValue(buildRequestDto(5, 2))
 			.retrieve()
 			.bodyToMono(Response.class)
 			.doOnNext(System.out::println);
@@ -36,7 +36,7 @@ public class L03PostRequestTest extends BaseTest {
 	}
 	
 	
-	private MultiplyRequestDto buiRequestDto(int a, int b) {
+	private MultiplyRequestDto buildRequestDto(int a, int b) {
 		
 		MultiplyRequestDto dto = new MultiplyRequestDto();
 		
@@ -45,5 +45,7 @@ public class L03PostRequestTest extends BaseTest {
 		
 		return dto;
 	}
+
+
 
 }

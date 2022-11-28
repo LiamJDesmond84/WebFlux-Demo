@@ -22,6 +22,8 @@ public class L04HeadersTest extends BaseTest{
 		Mono<Response> responseMono = webClient
 			.post()
 			.uri("reactive-math/multiply")
+			.headers(h -> h.set("someKey", "someValue"))
+			.header("someKey2", "someValue2")
 			.bodyValue(buildRequestDto(5, 2))
 			.retrieve()
 			.bodyToMono(Response.class)

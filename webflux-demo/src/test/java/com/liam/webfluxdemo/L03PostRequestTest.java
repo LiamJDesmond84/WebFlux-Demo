@@ -8,6 +8,9 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import com.liam.webfluxdemo.dtos.MultiplyRequestDto;
 import com.liam.webfluxdemo.dtos.Response;
 
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
+
 public class L03PostRequestTest extends BaseTest {
 	
 	@Autowired
@@ -17,13 +20,18 @@ public class L03PostRequestTest extends BaseTest {
 	@Test
 	public void postTest() {
 		
-		webClient
+		Mono<Response> responseMono = webClient
 			.post()
 			.uri("reactive-math/multiply")
 			.bodyValue(buiRequestDto(5, 2))
 			.retrieve()
 			.bodyToMono(Response.class)
 			.doOnNext(System.out::println);
+		
+		StepVerifier.create(responseMono)
+			.expectNextCount(1)
+			.verifyComplete();
+		
 		
 	}
 	

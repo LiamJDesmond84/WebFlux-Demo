@@ -6,6 +6,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.server.ServerRequest;
 
 import com.liam.webfluxdemo.dtos.MultiplyRequestDto;
+import com.liam.webfluxdemo.dtos.Response;
 
 public class L03PostRequestTest extends BaseTest {
 	
@@ -14,11 +15,15 @@ public class L03PostRequestTest extends BaseTest {
 	
 	
 	@Test
-	public void postTest(ServerRequest serverRequest) {
+	public void postTest() {
 		
-		Mono<Response> monoResponse = webClient
-				.post()
-				.uri()
+		webClient
+			.post()
+			.uri("reactive-math/multiply")
+			.bodyValue(buiRequestDto(5, 2))
+			.retrieve()
+			.bodyToMono(Response.class)
+			.doOnNext(System.out::println);
 		
 	}
 	

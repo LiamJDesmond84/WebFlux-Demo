@@ -27,7 +27,7 @@ public class WebfluxDemoApplication {
 					//  Can be cancelled anytime, will convert to JSON & return each item as it is emitted. JSON conversion for every single item. - Asynchronous/non-blocking
 	
 		// RouterFunction
-			//	Flux<Response> - .GET("router/table/{input}", requestHandler::tableHandler)
+			// Flux<Response> - .GET("router/table/{input}", requestHandler::tableHandler)
 					// Can be cancelled anytime, but will only return/collect, convert to JSON & return the items until it is completed. - Asynchronous/non-blocking
 	
 			// MediaType.TEXT_EVENT_STREAM_VALUE

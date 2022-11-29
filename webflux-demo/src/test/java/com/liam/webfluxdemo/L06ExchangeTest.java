@@ -2,9 +2,11 @@ package com.liam.webfluxdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import com.liam.webfluxdemo.dtos.InputFailedValidationResponse;
 import com.liam.webfluxdemo.dtos.Response;
 
 import reactor.core.publisher.Mono;
@@ -15,15 +17,17 @@ public class L06ExchangeTest extends BaseTest {
 	@Autowired
 	private WebClient webClient;
 	
+	// .exchange = .retrieve + additional info: http, status code, etc
 	@Test
 	public void badRequestTest() {
 		
+		// Will either return a Mono<Response> or MonoInputFailedValidationResponse>
+		// Depending on the status code
 		
-		Mono<Response> responseFlux = webClient
+		Mono<Object> responseFlux = webClient
 			.get()
 			.uri("reactive-math/square/{inputVar}/throw", 5)
-			.retrieve()
-			.bodyToMono(Response.class) // Mono<Response>
+			.exchangeToMono(this::exchangebody) // Mono<Response> or MonoInputFailedValidationResponse>
 			.doOnNext(x -> System.out.println("Print Statement: " + x))
 			.doOnError(err -> System.out.println(err.getMessage()));
 //			.doOnNext(System.out::println)
@@ -33,6 +37,18 @@ public class L06ExchangeTest extends BaseTest {
 //			.expectNextCount(1)
 //			.verifyComplete();
 			.verifyError(WebClientResponseException.BadRequest.class); // From error stack-trace
+		
+	}
+	
+	
+	private Mono<Object> exchangebody(ClientResponse clientResp) {
+		
+		if(clientResp.rawStatusCode() == 400 ) {
+			return clientResp.bodyToMono(InputFailedValidationResponse.class);
+		}
+		else {
+			return clientResp.bodyToMono(Response.class);
+		}
 		
 	}
 

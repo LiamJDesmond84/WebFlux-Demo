@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
+
 
 import com.liam.webfluxdemo.dtos.InputFailedValidationResponse;
 import com.liam.webfluxdemo.dtos.Response;
@@ -34,9 +34,9 @@ public class L06ExchangeTest extends BaseTest {
 //			.log();
 		
 		StepVerifier.create(responseFlux)
-//			.expectNextCount(1)
-//			.verifyComplete();
-			.verifyError(WebClientResponseException.BadRequest.class); // From error stack-trace
+			.expectNextCount(1)
+			.verifyComplete();
+
 		
 	}
 	

@@ -1,9 +1,13 @@
 package com.liam.webfluxdemo;
 
+import java.net.URI;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+
+
 
 public class L07QueryParamsTest extends BaseTest {
 	
@@ -17,7 +21,17 @@ public class L07QueryParamsTest extends BaseTest {
 	@Test
 	public void queryParamsTest() {
 		
-		UriComponentsBuilder.fromUriString(queryString);
+		URI uri = UriComponentsBuilder.fromUriString(queryString)
+			.build(10, 20);
+		
+		webClient.get()
+			.uri(uri)
+			.retrieve()
+			.bodyToFlux(Integer.class)
+			.doOnNext(System.out::println);
+			
+		
+		
 	}
 
 }

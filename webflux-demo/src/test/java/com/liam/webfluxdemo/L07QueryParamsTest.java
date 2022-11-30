@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
+
 
 
 public class L07QueryParamsTest extends BaseTest {
@@ -24,12 +27,15 @@ public class L07QueryParamsTest extends BaseTest {
 		URI uri = UriComponentsBuilder.fromUriString(queryString)
 			.build(10, 20);
 		
-		webClient.get()
+		Flux<Integer> integerFlux = webClient.get()
 			.uri(uri)
 			.retrieve()
 			.bodyToFlux(Integer.class)
 			.doOnNext(System.out::println);
 			
+		StepVerifier.create(integerFlux)
+			.expectNextCount(2)
+			.verifyComplete();
 		
 		
 	}

@@ -1,6 +1,7 @@
 package com.liam.webfluxdemo;
 
 import java.net.URI;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,23 @@ public class L07QueryParamsTest extends BaseTest {
 	@Test
 	public void queryParamsTest() {
 		
-		// Alternate builder with query params
+		//1: Alternate builder with query params
 		
 //		URI uri = UriComponentsBuilder.fromUriString(queryString)
 //			.build(10, 20);
 		
+		
+		//2: Alternate for adding queryParams
+		Map<String, Integer> map = Map.of(
+				"count", 10,
+				"page", 20
+			);
+		
 		Flux<Integer> integerFlux = webClient
 			.get()
 //			.uri(uri)
-			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(10, 20))	
+//			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(10, 20))
+			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(map))
 			.retrieve()
 			.bodyToFlux(Integer.class)
 			.doOnNext(System.out::println);

@@ -25,13 +25,13 @@ public class L07QueryParamsTest extends BaseTest {
 	@Test
 	public void queryParamsTest() {
 		
-		//1: Alternate builder with query params
+		// #1: Alternate builder with query params
 		
 //		URI uri = UriComponentsBuilder.fromUriString(queryString)
 //			.build(10, 20);
 		
 		
-		//2: Alternate for adding queryParams
+		// #2: Alternate for adding queryParams
 		Map<String, Integer> map = Map.of(
 				"count", 10,
 				"page", 20
@@ -39,9 +39,13 @@ public class L07QueryParamsTest extends BaseTest {
 		
 		Flux<Integer> integerFlux = webClient
 			.get()
-//			.uri(uri)
-//			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(10, 20))
-			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(map))
+			
+//			.uri(uri) // ----------> #1
+			
+//			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(map)) // ----------> #2
+			
+			.uri(x -> x.path("/jobs/search").query("count={count}&page={page}").build(10, 20))
+			
 			.retrieve()
 			.bodyToFlux(Integer.class)
 			.doOnNext(System.out::println);

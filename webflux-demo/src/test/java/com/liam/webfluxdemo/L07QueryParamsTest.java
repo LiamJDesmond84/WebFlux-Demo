@@ -24,13 +24,15 @@ public class L07QueryParamsTest extends BaseTest {
 	@Test
 	public void queryParamsTest() {
 		
+		// Alternate builder with query params
+		
 //		URI uri = UriComponentsBuilder.fromUriString(queryString)
 //			.build(10, 20);
 		
 		Flux<Integer> integerFlux = webClient
-				.get()
-			.uri(x -> x.path("http://localhost:8080/jobs/search").query("count={count}&page={page}").build(10, 20))	
+			.get()
 //			.uri(uri)
+			.uri(x -> x.path("http://localhost:8080/jobs/search").query("count={count}&page={page}").build(10, 20))	
 			.retrieve()
 			.bodyToFlux(Integer.class)
 			.doOnNext(System.out::println);

@@ -18,6 +18,7 @@ public class WebClientConfig {
 		return WebClient.builder()
 				.baseUrl("http://localhost:8080")
 				.defaultHeaders(h -> h.setBasicAuth("username", "password"))
+				.filter((clientRequestVar, exchangeFunctionVar) -> sessionToken(clientRequestVar, exchangeFunctionVar))
 				.build();
 	}
 	

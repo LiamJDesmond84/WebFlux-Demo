@@ -26,6 +26,11 @@ public class WebClientConfig {
 		
 		System.out.println("Generating Session");
 		
+		ClientRequest clientRequest = ClientRequest.from(request)
+			.headers(h -> h.setBearerAuth("some-long-jwt"))
+			.build();
+		
+		return exFunc.exchange(clientRequest);
 		
 	}
 }

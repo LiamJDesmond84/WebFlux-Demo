@@ -26,7 +26,7 @@ public class WebClientConfig {
 	
 	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
 		
-		System.out.println("Generating Session");
+		System.out.println("Generating Session Token");
 		
 		ClientRequest clientRequest = ClientRequest.from(request)
 			.headers(h -> h.setBearerAuth("some-long-jwt"))

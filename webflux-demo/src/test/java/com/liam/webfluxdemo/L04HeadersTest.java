@@ -30,7 +30,11 @@ public class L04HeadersTest extends BaseTest{
 			.bodyToMono(Response.class)
 			.doOnNext(System.out::println);
 		
-		StepVerifier.create(responseMono)
+		StepVerifier.create(responseMono) // Session Token Generator invoked individually
+			.expectNextCount(1)
+			.verifyComplete();
+		
+		StepVerifier.create(responseMono) // Session Token Generator invoked individually
 			.expectNextCount(1)
 			.verifyComplete();
 		

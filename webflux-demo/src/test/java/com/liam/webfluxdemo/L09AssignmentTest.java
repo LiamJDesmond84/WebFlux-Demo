@@ -21,7 +21,7 @@ public class L09AssignmentTest extends BaseTest {
 
 	
 	@Test
-	public void Test() {
+	public void TestOperators() {
 		
 		Flux<String> flux = Flux.range(1, 5)
 			.flatMap(b -> Flux.just("+", "-", "*", "/")

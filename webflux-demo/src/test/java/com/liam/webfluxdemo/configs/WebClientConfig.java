@@ -41,7 +41,7 @@ public class WebClientConfig {
 		
 		// Key: auth -> basic or OAuth
 		ClientRequest clientRequest = request.attribute("auth")
-			.map(val -> val.equals("basic") ? withBasicAuthentication(request) : withOAuth(request))
+			.map(val -> val.equals("basic") ? withBasicAuth(request) : withOAuth(request))
 			.orElse(request);
 		
 		return exFunc.exchange(clientRequest);
@@ -49,7 +49,7 @@ public class WebClientConfig {
 	}
 	
 	
-	private ClientRequest withBasicAuthentication(ClientRequest clientRequest) {
+	private ClientRequest withBasicAuth(ClientRequest clientRequest) {
 		
 		return ClientRequest.from(clientRequest)
 				.headers(h -> h.setBasicAuth("username", "password"))

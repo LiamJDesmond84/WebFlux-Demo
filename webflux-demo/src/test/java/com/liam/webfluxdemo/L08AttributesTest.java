@@ -24,21 +24,17 @@ public class L08AttributesTest extends BaseTest {
 		Mono<Response> responseMono = webClient
 			.post()
 			.uri("reactive-math/multiply")
-			.headers(h -> h.set("someKey", "someValue"))
-//			.headers(h -> h.setBasicAuth("username", "password"))
-			.header("someKey2", "someValue2")
 			.bodyValue(buildRequestDto(5, 2))
+			.attribute("auth", "basic")
 			.retrieve()
 			.bodyToMono(Response.class)
 			.doOnNext(System.out::println);
 		
-		StepVerifier.create(responseMono) // Session Token Generator invoked individually
+		StepVerifier.create(responseMono)
 			.expectNextCount(1)
 			.verifyComplete();
 		
-		StepVerifier.create(responseMono) // Session Token Generator invoked individually
-			.expectNextCount(1)
-			.verifyComplete();
+
 		
 		
 	}

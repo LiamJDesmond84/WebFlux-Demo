@@ -39,7 +39,9 @@ public class WebClientConfig {
 	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
 		
 		// Key: auth -> basic or OAuth
-		request.attribute("auth");
+		request.attribute("auth")
+			.map(val -> val.equals("basic") ? withBasicAuthentication(request) : withOAuth(request))
+			.orElse(request);
 		
 		return exFunc.exchange(request);
 		

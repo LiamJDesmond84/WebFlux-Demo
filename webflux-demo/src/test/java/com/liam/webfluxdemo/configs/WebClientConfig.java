@@ -47,7 +47,7 @@ public class WebClientConfig {
 	private ClientRequest withOAuth(ClientRequest clientRequest) {
 		
 		return ClientRequest.from(clientRequest)
-				.headers(h -> h.setBasicAuth("username", "password"))
+				.headers(h -> h.setBearerAuth("some-long-jwt"))
 				.build();
 	}
 }

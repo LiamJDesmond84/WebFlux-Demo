@@ -24,15 +24,24 @@ public class WebClientConfig {
 	}
 	
 	
+//	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
+//		
+//		System.out.println("Generating Session Token");
+//		
+//		ClientRequest clientRequest = ClientRequest.from(request)
+//			.headers(h -> h.setBearerAuth("some-long-jwt"))
+//			.build();
+//		
+//		return exFunc.exchange(clientRequest);
+//		
+//	}
+	
 	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
 		
-		System.out.println("Generating Session Token");
+		// Key: auth -> basic or OAuth
+		request.attribute("auth");
 		
-		ClientRequest clientRequest = ClientRequest.from(request)
-			.headers(h -> h.setBearerAuth("some-long-jwt"))
-			.build();
-		
-		return exFunc.exchange(clientRequest);
+		return exFunc.exchange(request);
 		
 	}
 	

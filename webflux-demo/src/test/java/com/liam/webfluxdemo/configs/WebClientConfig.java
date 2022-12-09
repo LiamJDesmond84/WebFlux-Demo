@@ -19,31 +19,32 @@ public class WebClientConfig {
 				.baseUrl("http://localhost:8080")
 				.defaultHeaders(h -> h.setBasicAuth("username", "password"))
 //				.filter((clientRequestVar, exchangeFunctionVar) -> sessionToken(clientRequestVar, exchangeFunctionVar)) // Same as below
-				.filter(this::sessionToken)
+//				.filter(this::sessionToken)
+				.filter(this::sessionAuthToken)
 				.build();
 	}
 	
 	
-//	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
-//		
-//		System.out.println("Generating Session Token");
-//		
-//		ClientRequest clientRequest = ClientRequest.from(request)
-//			.headers(h -> h.setBearerAuth("some-long-jwt"))
-//			.build();
-//		
-//		return exFunc.exchange(clientRequest);
-//		
-//	}
-	
 	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
 		
+		System.out.println("Generating Session Token");
+		
+		ClientRequest clientRequest = ClientRequest.from(request)
+			.headers(h -> h.setBearerAuth("some-long-jwt"))
+			.build();
+		
+		return exFunc.exchange(clientRequest);
+		
+	}
+	
+	private Mono<ClientResponse> sessionAuthToken(ClientRequest request, ExchangeFunction exFunc) {
+		
 		// Key: auth -> basic or OAuth
-		request.attribute("auth")
+		ClientRequest clientRequest = request.attribute("auth")
 			.map(val -> val.equals("basic") ? withBasicAuthentication(request) : withOAuth(request))
 			.orElse(request);
 		
-		return exFunc.exchange(request);
+		return exFunc.exchange(clientRequest);
 		
 	}
 	

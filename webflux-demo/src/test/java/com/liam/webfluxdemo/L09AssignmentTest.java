@@ -23,13 +23,15 @@ public class L09AssignmentTest extends BaseTest {
 	@Test
 	public void Test() {
 		
-		Flux.range(1, 5)
-			.map(b -> Flux.just("+", "-", "*", "/")
+		Flux<String> flux = Flux.range(1, 5)
+			.flatMap(b -> Flux.just("+", "-", "*", "/")
 					.flatMap(oper -> send(b, oper)))
 			.doOnNext(System.out::println);
 		
 		
-		StepVerifier.create(null)
+		StepVerifier.create(flux)
+			.expectNextCount(20)
+			.verifyComplete();
 		
 	}
 	

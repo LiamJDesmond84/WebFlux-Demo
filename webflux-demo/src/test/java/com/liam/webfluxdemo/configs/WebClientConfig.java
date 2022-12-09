@@ -35,4 +35,12 @@ public class WebClientConfig {
 		return exFunc.exchange(clientRequest);
 		
 	}
+	
+	
+	private ClientRequest withBasicAuthentication(ClientRequest clientRequest) {
+		
+		return ClientRequest.from(clientRequest)
+				.headers(h -> h.setBasicAuth("username", "password"))
+				.build();
+	}
 }

@@ -26,7 +26,7 @@ public class L08AttributesTest extends BaseTest {
 			.post()
 			.uri("reactive-math/multiply")
 			.bodyValue(buildRequestDto(5, 2))
-//			.attribute("auth", "sdfsfd")
+			.attribute("auth", "sdfsfd")
 			.retrieve()
 			.bodyToMono(Response.class)
 			.doOnNext(System.out::println);

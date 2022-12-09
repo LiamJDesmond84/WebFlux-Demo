@@ -43,4 +43,11 @@ public class WebClientConfig {
 				.headers(h -> h.setBasicAuth("username", "password"))
 				.build();
 	}
+	
+	private ClientRequest withOAuth(ClientRequest clientRequest) {
+		
+		return ClientRequest.from(clientRequest)
+				.headers(h -> h.setBasicAuth("username", "password"))
+				.build();
+	}
 }

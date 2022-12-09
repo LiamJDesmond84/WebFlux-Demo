@@ -18,14 +18,15 @@ public class L08AttributesTest extends BaseTest {
 	
 	String queryString = "http://localhost:8080/jobs/search?count={count}&page={page}";
 	
+	// Here is what we are sending
 	@Test
-	public void headersTest() {
+	public void headersTestWithAuth() {
 		
 		Mono<Response> responseMono = webClient
 			.post()
 			.uri("reactive-math/multiply")
 			.bodyValue(buildRequestDto(5, 2))
-			.attribute("auth", "basic")
+//			.attribute("auth", "sdfsfd")
 			.retrieve()
 			.bodyToMono(Response.class)
 			.doOnNext(System.out::println);

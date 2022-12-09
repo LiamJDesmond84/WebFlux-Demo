@@ -17,7 +17,7 @@ public class WebClientConfig {
 		
 		return WebClient.builder()
 				.baseUrl("http://localhost:8080")
-				.defaultHeaders(h -> h.setBasicAuth("username", "password"))
+//				.defaultHeaders(h -> h.setBasicAuth("username", "password"))
 //				.filter((clientRequestVar, exchangeFunctionVar) -> sessionToken(clientRequestVar, exchangeFunctionVar)) // Same as below
 //				.filter(this::sessionToken)
 				.filter(this::sessionAuthToken)
@@ -25,17 +25,17 @@ public class WebClientConfig {
 	}
 	
 	
-	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
-		
-		System.out.println("Generating Session Token");
-		
-		ClientRequest clientRequest = ClientRequest.from(request)
-			.headers(h -> h.setBearerAuth("some-long-jwt"))
-			.build();
-		
-		return exFunc.exchange(clientRequest);
-		
-	}
+//	private Mono<ClientResponse> sessionToken(ClientRequest request, ExchangeFunction exFunc) {
+//		
+//		System.out.println("Generating Session Token");
+//		
+//		ClientRequest clientRequest = ClientRequest.from(request)
+//			.headers(h -> h.setBearerAuth("some-long-jwt"))
+//			.build();
+//		
+//		return exFunc.exchange(clientRequest);
+//		
+//	}
 	
 	private Mono<ClientResponse> sessionAuthToken(ClientRequest request, ExchangeFunction exFunc) {
 		
@@ -56,10 +56,12 @@ public class WebClientConfig {
 				.build();
 	}
 	
+	// Not actually creating an OAth token, just an example of the if/else logic
+	
 	private ClientRequest withOAuth(ClientRequest clientRequest) {
 		
 		return ClientRequest.from(clientRequest)
-				.headers(h -> h.setBearerAuth("some-long-jwt"))
+				.headers(h -> h.setBearerAuth("some-other-token"))
 				.build();
 	}
 }
